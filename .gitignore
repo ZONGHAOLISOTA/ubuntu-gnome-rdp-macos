@@ -1,0 +1,5 @@
+# Never commit personalized RDP exports or local notes.
+*.local.rdp
+*.private.rdp
+.env
+.DS_Store
