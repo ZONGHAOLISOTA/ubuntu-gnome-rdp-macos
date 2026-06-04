@@ -9,9 +9,9 @@ This note covers a common failure mode for GNOME Remote Desktop remote-login ses
 - After logging in, the macOS RDP window becomes black.
 - The physical session may be kicked back to GDM, or an old session may remain stuck in `closing` state.
 
-## Most common cause
+## One common cause
 
-The independent remote-login session is using the same Linux account as the physical or mirror session.
+One common cause is using the same Linux account for both the physical or mirror session and the independent remote-login session.
 
 GNOME may need to tear down the old graphical session before starting the new one. On workstation-class machines, that handover can race with the old session teardown and fail to initialize the new headless rendering path. The result can be a black RDP screen rather than a clean `Session Already Running` prompt.
 
