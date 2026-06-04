@@ -28,6 +28,16 @@ It focuses on a practical workstation pattern:
 
 ---
 
+## TL;DR
+
+- **Port `3389`** = mirror mode (Desktop Sharing, user-level `grd`); **port `3390`** = independent session (Remote Login, system-level `grd`).
+- On the macOS Windows App, export the `.rdp` file and set `use redirection server name:i:1` — this fixes the misleading `0x207` / “password expired” error.
+- Set `use multimon:i:0` so the remote session stays on a single display instead of grabbing every Mac monitor.
+- Keep RDP private behind **Tailscale**; never expose `3389` / `3390` to the public internet.
+- Built on Ubuntu's native `gnome-remote-desktop`, **not** `xrdp`.
+
+---
+
 ## Relationship to existing guides
 
 There are already scattered posts about Ubuntu 24.04 Remote Desktop and the macOS `0x207` workaround. This guide is **not** claiming first discovery of the `0x207` fix.
@@ -51,7 +61,7 @@ Useful prior references are listed in [References](#references).
 |---|---|
 | Ubuntu server | Ubuntu 24.04 LTS, GNOME 46+ |
 | Remote desktop stack | Built-in `gnome-remote-desktop`, not `xrdp` |
-| macOS client | macOS with **Windows App** from the App Store, formerly Microsoft Remote Desktop |
+| macOS client | macOS Tahoe 26.5.1 (MacBook Air, M3) with **Windows App** from the App Store, formerly Microsoft Remote Desktop |
 | Network | Tailscale with MagicDNS enabled |
 | Hardware profile | Ubuntu workstation / GPU workstation with a physical display available for mirror mode |
 | Recommended topology | Keep RDP private through Tailscale; do **not** expose 3389/3390 to the public internet |
@@ -393,6 +403,10 @@ loginctl show-user $USER | grep -E "State|Sessions"
 
 - Mirror mode is constrained by the physical monitor / EDID. Use a real high-resolution display or a virtual EDID dongle if needed.
 - Independent mode negotiates resolution with the client. Adjust the `.rdp` file or Windows App display settings.
+
+### Independent session shows a black screen
+
+If mirror mode works but the independent session on `3390` turns black after the GDM login, see the dedicated note: [Independent session black screen troubleshooting](docs/independent-session-black-screen.md). The most common cause is sharing one Linux account between the physical/mirror session and the independent session; use a dedicated remote account instead.
 
 ---
 

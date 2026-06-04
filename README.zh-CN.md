@@ -22,6 +22,16 @@
 
 ---
 
+## TL;DR
+
+- **端口 `3389`** = 屏幕镜像（Desktop Sharing，用户级 `grd`）；**端口 `3390`** = 独立会话（Remote Login，system 级 `grd`）。
+- 在 macOS Windows App 中导出 `.rdp` 文件，设置 `use redirection server name:i:1` —— 这能修复误导性的 `0x207` / password expired 错误。
+- 设置 `use multimon:i:0`，让远程会话只占用单个显示器，而不是抢占 Mac 的所有屏幕。
+- RDP 只走 **Tailscale** 私有网络，绝不要把 `3389` / `3390` 暴露到公网。
+- 基于 Ubuntu 内置 `gnome-remote-desktop`，**不是** `xrdp`。
+
+---
+
 ## 本文与已有资料的关系
 
 网上已经有一些关于 Ubuntu 24.04 Remote Desktop、macOS Windows App 连接失败，以及 `0x207` workaround 的零散资料。本文不声称首发发现 `0x207` 修复方法；本文的重点是把这些分散的坑整合成一套可复现的 workstation 部署方案：
@@ -42,7 +52,7 @@
 |---|---|
 | Ubuntu 主机 | Ubuntu 24.04 LTS，GNOME 46+ |
 | 远程桌面栈 | Ubuntu 内置 `gnome-remote-desktop`，不是 `xrdp` |
-| Mac 客户端 | macOS + App Store 的 Windows App（原 Microsoft Remote Desktop） |
+| Mac 客户端 | macOS Tahoe 26.5.1（MacBook Air，M3）+ App Store 的 Windows App（原 Microsoft Remote Desktop） |
 | 网络 | Tailscale + MagicDNS |
 | 硬件形态 | Ubuntu workstation / GPU workstation；镜像模式需要物理显示器或 EDID |
 | 安全建议 | 只通过 Tailscale / VPN 访问，不要把 3389/3390 暴露到公网 |
@@ -383,6 +393,10 @@ loginctl show-user $USER | grep -E "State|Sessions"
 
 - 镜像模式受物理显示器 / EDID 限制。需要更高分辨率时，使用真实高分屏或虚拟 EDID dongle。
 - 独立会话模式由客户端协商分辨率。可以调整 `.rdp` 文件或 Windows App 的显示设置。
+
+### 独立会话黑屏
+
+如果镜像模式正常，但 `3390` 上的独立会话在 GDM 登录后变黑屏，详见专门的排查文档：[独立会话黑屏排查](docs/independent-session-black-screen.md)。最常见的原因是物理 / 镜像会话和独立会话共用同一个 Linux 账户；改用专用远程账户即可。
 
 ---
 
