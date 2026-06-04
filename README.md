@@ -1,6 +1,21 @@
+<div align="center">
+
 # Ubuntu 24.04 GNOME Remote Desktop from macOS
 
-> Dual RDP modes, Tailscale access, and the macOS Windows App `0x207` fix.
+Dual RDP modes, Tailscale access, and the macOS Windows App `0x207` fix.
+
+[English](README.md) | [简体中文](README.zh-CN.md)
+
+![Ubuntu](https://img.shields.io/badge/Ubuntu-24.04-E95420)
+![GNOME](https://img.shields.io/badge/GNOME-Remote%20Desktop-4A86CF)
+![macOS](https://img.shields.io/badge/macOS-Windows%20App-000000)
+![RDP](https://img.shields.io/badge/RDP-3389%20%2F%203390-0078D4)
+![Tailscale](https://img.shields.io/badge/Tailscale-MagicDNS-6A5ACD)
+![License](https://img.shields.io/github/license/ZONGHAOLISOTA/ubuntu-gnome-rdp-macos)
+
+</div>
+
+---
 
 This repository is a reproducible setup guide for using **macOS** to access an **Ubuntu 24.04 GNOME** workstation through Ubuntu's built-in **GNOME Remote Desktop** stack.
 
@@ -10,8 +25,6 @@ It focuses on a practical workstation pattern:
 - **Remote login / independent session mode** for starting a separate GNOME session through GDM.
 - **Tailscale / MagicDNS** for cross-network access without exposing RDP to the public internet.
 - **macOS Windows App compatibility fixes**, especially the misleading `0x207` / “password expired” failure.
-
-Chinese version: [README.zh-CN.md](README.zh-CN.md)
 
 ---
 
