@@ -1,9 +1,24 @@
-# 从 Mac 远程访问 Ubuntu 24.04 GNOME：双 RDP 模式、Tailscale 与 0x207 修复完整指南
+<div align="center">
+
+# 从 Mac 远程访问 Ubuntu 24.04 GNOME
+
+双 RDP 模式、Tailscale 私有网络访问，以及 macOS Windows App `0x207` 修复。
+
+[English](README.md) | [简体中文](README.zh-CN.md)
+
+![Ubuntu](https://img.shields.io/badge/Ubuntu-24.04-E95420)
+![GNOME](https://img.shields.io/badge/GNOME-Remote%20Desktop-4A86CF)
+![macOS](https://img.shields.io/badge/macOS-Windows%20App-000000)
+![RDP](https://img.shields.io/badge/RDP-3389%20%2F%203390-0078D4)
+![Tailscale](https://img.shields.io/badge/Tailscale-MagicDNS-6A5ACD)
+![License](https://img.shields.io/github/license/ZONGHAOLISOTA/ubuntu-gnome-rdp-macos)
+
+</div>
+
+---
 
 > 使用 Ubuntu 24.04 内置 GNOME Remote Desktop，从 macOS 通过 RDP 访问 Linux workstation。
 > 支持「屏幕镜像」和「独立会话」两种模式并存，并通过 Tailscale 安全跨网访问。
-
-英文版见：[README.md](README.md)。
 
 ---
 
@@ -16,6 +31,8 @@
 - 两种模式分配独立端口并保存为两个 `.rdp` 文件；
 - 通过 Tailscale / MagicDNS 跨网络访问；
 - 汇总 macOS Windows App 的兼容性参数和实际故障排查路径。
+
+英文版见：[README.md](README.md)。
 
 ---
 
